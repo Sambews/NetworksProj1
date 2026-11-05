@@ -1,5 +1,8 @@
 #include <sys/socket.h>
-
+#include <iostream>
+#include <cstring>
+#include <unistd.h>
+#include <netinet/in.h>
 
 
 int main(int argc, char *argv[]){
@@ -18,5 +21,15 @@ int main(int argc, char *argv[]){
 	
 	int clientSocket = accept(serverSocket, nullptr, nullptr);
 
+
+	char buffer[1024];
+	recv(clientSocket, buffer, sizeof(buffer), 0);
+
+	std::cout << "Message: " << buffer << std::endl;
+	
+
+	//Closing socket
+	close(serverSocket);
+	return 0;
 
 }
